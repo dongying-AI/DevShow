@@ -3,7 +3,7 @@
    Step-based wizard with live preview
    ============================================ */
 
-import { currentLang, t } from './i18n.js';
+import { currentLang, t, applyLanguage } from './i18n.js';
 import {
     addProduct, updateProduct, getProduct,
     PRODUCT_TYPES, DELIVERY_METHODS,
@@ -142,6 +142,9 @@ function renderStep(step) {
     if (step === 1) setupStep1();
     if (step === 2) setupStep2();
     if (step === 3) { setupStep3(); updatePreview(); }
+
+    // Apply i18n to dynamically rendered labels
+    applyLanguage();
 }
 
 /* ================================================================
@@ -153,15 +156,15 @@ const STEP_RENDERERS = {
         <div class="publish-form">
             <div class="form-row single">
                 <div class="form-group">
-                    <label class="form-label"><span class="required">*</span> 作品名称</label>
+                    <label class="form-label" data-i18n="publish_label_name"><span class="required">*</span> 作品名称</label>
                     <input class="form-input" id="pubTitle" value="${esc(formData.title)}"
-                           placeholder="例：智能代码审查助手" />
+                           placeholder="${esc(t('publish_ph_name'))}" />
                     <span class="form-error-msg" id="errTitle"></span>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label"><span class="required">*</span> 作品类型</label>
+                    <label class="form-label" data-i18n="publish_label_type"><span class="required">*</span> 作品类型</label>
                     <select class="form-select" id="pubType">
                         ${PRODUCT_TYPES.zh.map(t => `<option value="${esc(t)}" ${formData.type === t ? 'selected' : ''}>${t}</option>`).join('')}
                     </select>
@@ -169,32 +172,32 @@ const STEP_RENDERERS = {
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">技术栈</label>
+                    <label class="form-label" data-i18n="publish_label_tech">技术栈</label>
                     <input class="form-input" id="pubTech" value="${esc(formData.tech)}"
-                           placeholder="例：Python / FastAPI / React" />
+                           placeholder="${esc(t('publish_ph_tech'))}" />
                 </div>
                 <div class="form-group">
-                    <label class="form-label">创作者署名</label>
+                    <label class="form-label" data-i18n="publish_label_author">创作者署名</label>
                     <input class="form-input" id="pubAuthor" value="${esc(formData.author)}"
-                           placeholder="例：张三 (中国)" />
+                           placeholder="${esc(t('publish_ph_author'))}" />
                 </div>
             </div>
             <div class="form-row triple">
                 <div class="form-group">
-                    <label class="form-label"><span class="required">*</span> 期望售价</label>
+                    <label class="form-label" data-i18n="publish_label_price"><span class="required">*</span> 期望售价</label>
                     <input class="form-input" id="pubPrice" value="${esc(formData.price)}"
-                           placeholder="例：49" type="number" min="0" step="0.01" />
+                           placeholder="${esc(t('publish_ph_price'))}" type="number" min="0" step="0.01" />
                     <span class="form-error-msg" id="errPrice"></span>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">币种</label>
+                    <label class="form-label" data-i18n="publish_label_currency">币种</label>
                     <select class="form-select" id="pubCurrency">
                         <option value="CNY" ${formData.priceCurrency === 'CNY' ? 'selected' : ''}>¥ CNY</option>
                         <option value="USD" ${formData.priceCurrency === 'USD' ? 'selected' : ''}>$ USD</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">开源协议</label>
+                    <label class="form-label" data-i18n="publish_label_license">开源协议</label>
                     <select class="form-select" id="pubLicense">
                         ${LICENSE_OPTIONS.map(o => {
                             const label = currentLang === 'zh' ? (o.label_zh || o.label) : (o.label_en || o.label);
@@ -209,21 +212,21 @@ const STEP_RENDERERS = {
     2: () => `
         <div class="publish-form">
             <div class="form-group full">
-                <label class="form-label"><span class="required">*</span> 作品描述</label>
+                <label class="form-label" data-i18n="publish_label_desc"><span class="required">*</span> 作品描述</label>
                 <textarea class="form-textarea" id="pubDesc"
-                          placeholder="详细描述作品功能、适用场景、技术亮点……">${esc(formData.desc)}</textarea>
+                          placeholder="${esc(t('publish_ph_desc'))}">${esc(formData.desc)}</textarea>
                 <span class="form-error-msg" id="errDesc"></span>
             </div>
             <div class="form-group full">
-                <label class="form-label">标签 / 关键词</label>
+                <label class="form-label" data-i18n="publish_label_tags">标签 / 关键词</label>
                 <div class="tags-input-wrapper" id="tagsWrapper" onclick="document.getElementById('tagInput').focus()">
                     ${tags.map(tg => `<span class="tag-chip">${esc(tg)}<span class="tag-remove" data-tag="${esc(tg)}">&times;</span></span>`).join('')}
-                    <input class="tags-input" id="tagInput" placeholder="输入后回车添加…" maxlength="20" />
+                    <input class="tags-input" id="tagInput" placeholder="${esc(t('publish_ph_tag'))}" maxlength="20" />
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">交付方式</label>
+                    <label class="form-label" data-i18n="publish_label_delivery">交付方式</label>
                     <select class="form-select" id="pubDelivery">
                         ${DELIVERY_METHODS.zh.map((m, i) => `<option value="${['source','binary','saas'][i]}" ${formData.deliveryMethod === ['source','binary','saas'][i] ? 'selected' : ''}>${m}</option>`).join('')}
                     </select>
@@ -525,15 +528,15 @@ function validateStep(step) {
     let valid = true;
 
     if (step === 1) {
-        if (!formData.title.trim()) { showError('errTitle', '请输入作品名称'); valid = false; }
+        if (!formData.title.trim()) { showError('errTitle', t('publish_err_name')); valid = false; }
         if (!formData.price || isNaN(parseFloat(formData.price)) || parseFloat(formData.price) <= 0) {
-            showError('errPrice', '请输入有效价格'); valid = false;
+            showError('errPrice', t('publish_err_price')); valid = false;
         }
     }
 
     if (step === 2) {
         if (!formData.desc.trim() || formData.desc.trim().length < 20) {
-            showError('errDesc', '请输入作品描述（至少 20 字）'); valid = false;
+            showError('errDesc', t('publish_err_desc')); valid = false;
         }
     }
 
