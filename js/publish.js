@@ -26,11 +26,11 @@ let editingProductId = null;
 
 /* === Form Data Object === */
 const formData = {
-    zhTitle: "", enTitle: "",
+    title: "",
     zhType: "桌面端软件", enType: "Desktop Software",
     tech: "", author: "",
     price: "", priceCurrency: "CNY",
-    zhDesc: "", enDesc: "",
+    desc: "",
     color: "#141416",
     coverImage: null,
     deliveryMethod: "source",
@@ -65,16 +65,14 @@ function openPublishEdit(productId) {
 
     // Pre-fill formData from existing product
     Object.assign(formData, {
-        zhTitle: prod.zh.title,
-        enTitle: prod.en.title,
+        title: prod.title,
         zhType: prod.zh.type,
         enType: prod.en.type,
         tech: prod.zh.tech,
         author: prod.zh.author,
         price: prod.price.replace(/[¥$ ]/g, ''),
         priceCurrency: prod.priceCurrency,
-        zhDesc: prod.zh.desc,
-        enDesc: prod.en.desc,
+        desc: prod.desc,
         color: prod.color,
         coverImage: prod.coverImage,
         deliveryMethod: prod.deliveryMethod,
@@ -154,23 +152,17 @@ function renderStep(step) {
 const STEP_RENDERERS = {
     1: () => `
         <div class="publish-form">
-            <div class="form-row">
+            <div class="form-row single">
                 <div class="form-group">
-                    <label class="form-label"><span class="required">*</span> <span data-i18n="publish_label_name_zh">作品名称（中文）</span></label>
-                    <input class="form-input" id="pubZhTitle" value="${esc(formData.zhTitle)}"
+                    <label class="form-label"><span class="required">*</span> 作品名称</label>
+                    <input class="form-input" id="pubTitle" value="${esc(formData.title)}"
                            placeholder="例：智能代码审查助手" />
-                    <span class="form-error-msg" id="errZhTitle"></span>
-                </div>
-                <div class="form-group">
-                    <label class="form-label"><span class="required">*</span> <span data-i18n="publish_label_name_en">作品名称（英文）</span></label>
-                    <input class="form-input" id="pubEnTitle" value="${esc(formData.enTitle)}"
-                           placeholder="e.g. Smart Code Review Assistant" />
-                    <span class="form-error-msg" id="errEnTitle"></span>
+                    <span class="form-error-msg" id="errTitle"></span>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label"><span class="required">*</span> <span data-i18n="publish_label_type">作品类型</span></label>
+                    <label class="form-label"><span class="required">*</span> 作品类型</label>
                     <select class="form-select" id="pubZhType">
                         ${PRODUCT_TYPES.zh.map(t => `<option value="${esc(t)}" ${formData.zhType === t ? 'selected' : ''}>${t}</option>`).join('')}
                     </select>
@@ -184,32 +176,32 @@ const STEP_RENDERERS = {
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label"><span data-i18n="publish_label_tech">技术栈</span></label>
+                    <label class="form-label">技术栈</label>
                     <input class="form-input" id="pubTech" value="${esc(formData.tech)}"
                            placeholder="例：Python / FastAPI / React" />
                 </div>
                 <div class="form-group">
-                    <label class="form-label"><span data-i18n="publish_label_author">创作者署名</span></label>
+                    <label class="form-label">创作者署名</label>
                     <input class="form-input" id="pubAuthor" value="${esc(formData.author)}"
                            placeholder="例：张三 (中国)" />
                 </div>
             </div>
             <div class="form-row triple">
                 <div class="form-group">
-                    <label class="form-label"><span class="required">*</span> <span data-i18n="publish_label_price">期望售价</span></label>
+                    <label class="form-label"><span class="required">*</span> 期望售价</label>
                     <input class="form-input" id="pubPrice" value="${esc(formData.price)}"
                            placeholder="例：49" type="number" min="0" step="0.01" />
                     <span class="form-error-msg" id="errPrice"></span>
                 </div>
                 <div class="form-group">
-                    <label class="form-label"><span data-i18n="publish_label_currency">币种</span></label>
+                    <label class="form-label">币种</label>
                     <select class="form-select" id="pubCurrency">
                         <option value="CNY" ${formData.priceCurrency === 'CNY' ? 'selected' : ''}>¥ CNY</option>
                         <option value="USD" ${formData.priceCurrency === 'USD' ? 'selected' : ''}>$ USD</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label"><span data-i18n="publish_label_license">开源协议</span></label>
+                    <label class="form-label">开源协议</label>
                     <select class="form-select" id="pubLicense">
                         ${LICENSE_OPTIONS.map(o => {
                             const label = currentLang === 'zh' ? (o.label_zh || o.label) : (o.label_en || o.label);
@@ -224,19 +216,13 @@ const STEP_RENDERERS = {
     2: () => `
         <div class="publish-form">
             <div class="form-group full">
-                <label class="form-label"><span class="required">*</span> <span data-i18n="publish_label_desc_zh">中文描述</span></label>
-                <textarea class="form-textarea" id="pubZhDesc"
-                          placeholder="详细描述作品功能、适用场景、技术亮点……">${esc(formData.zhDesc)}</textarea>
-                <span class="form-error-msg" id="errZhDesc"></span>
+                <label class="form-label"><span class="required">*</span> 作品描述</label>
+                <textarea class="form-textarea" id="pubDesc"
+                          placeholder="详细描述作品功能、适用场景、技术亮点……">${esc(formData.desc)}</textarea>
+                <span class="form-error-msg" id="errDesc"></span>
             </div>
             <div class="form-group full">
-                <label class="form-label"><span class="required">*</span> <span data-i18n="publish_label_desc_en">英文描述</span></label>
-                <textarea class="form-textarea" id="pubEnDesc"
-                          placeholder="Describe features, use cases, tech highlights...">${esc(formData.enDesc)}</textarea>
-                <span class="form-error-msg" id="errEnDesc"></span>
-            </div>
-            <div class="form-group full">
-                <label class="form-label"><span data-i18n="publish_label_tags">标签 / 关键词</span></label>
+                <label class="form-label">标签 / 关键词</label>
                 <div class="tags-input-wrapper" id="tagsWrapper" onclick="document.getElementById('tagInput').focus()">
                     ${tags.map(tg => `<span class="tag-chip">${esc(tg)}<span class="tag-remove" data-tag="${esc(tg)}">&times;</span></span>`).join('')}
                     <input class="tags-input" id="tagInput" placeholder="输入后回车添加…" maxlength="20" />
@@ -244,7 +230,7 @@ const STEP_RENDERERS = {
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label"><span data-i18n="publish_label_delivery">交付方式</span></label>
+                    <label class="form-label">交付方式</label>
                     <select class="form-select" id="pubDelivery">
                         ${DELIVERY_METHODS.zh.map((m, i) => `<option value="${['source','binary','saas'][i]}" ${formData.deliveryMethod === ['source','binary','saas'][i] ? 'selected' : ''}>${m}</option>`).join('')}
                     </select>
@@ -313,17 +299,6 @@ function setupStep1() {
         enType.addEventListener('change', () => {
             const idx = enType.selectedIndex;
             if (zhType.options[idx]) zhType.selectedIndex = idx;
-        });
-    }
-
-    // Autofill EN title from ZH
-    const zhTitle = document.getElementById('pubZhTitle');
-    const enTitle = document.getElementById('pubEnTitle');
-    if (zhTitle && enTitle && !formData.enTitle) {
-        zhTitle.addEventListener('blur', () => {
-            if (!enTitle.value.trim()) {
-                enTitle.placeholder = '(auto-translate) ' + zhTitle.value;
-            }
         });
     }
 }
@@ -544,12 +519,12 @@ function updatePreview() {
         <div class="preview-cover" style="background:${formData.color};">
             ${formData.coverImage
                 ? `<img src="${formData.coverImage}" alt="Preview" />`
-                : (formData.zhTitle
-                    ? `<span>${esc(formData.zhTitle)}</span>`
+                : (formData.title
+                    ? `<span>${esc(formData.title)}</span>`
                     : `<span style="opacity:0.4;">📷 3:4 Cover</span>`) }
         </div>
         <div class="preview-info">
-            <div class="preview-title">${esc(formData.zhTitle) || '作品名称'}</div>
+            <div class="preview-title">${esc(formData.title) || '作品名称'}</div>
             <div class="preview-type">${esc(zhType)}</div>
             <div class="preview-footer">
                 <span style="color:var(--color-price)">${esc(priceDisplay)}</span>
@@ -569,19 +544,15 @@ function validateStep(step) {
     let valid = true;
 
     if (step === 1) {
-        if (!formData.zhTitle.trim()) { showError('errZhTitle', t('publish_err_name_zh')); valid = false; }
-        if (!formData.enTitle.trim()) { showError('errEnTitle', t('publish_err_name_en')); valid = false; }
+        if (!formData.title.trim()) { showError('errTitle', '请输入作品名称'); valid = false; }
         if (!formData.price || isNaN(parseFloat(formData.price)) || parseFloat(formData.price) <= 0) {
-            showError('errPrice', t('publish_err_price')); valid = false;
+            showError('errPrice', '请输入有效价格'); valid = false;
         }
     }
 
     if (step === 2) {
-        if (!formData.zhDesc.trim() || formData.zhDesc.trim().length < 20) {
-            showError('errZhDesc', t('publish_err_desc_zh')); valid = false;
-        }
-        if (!formData.enDesc.trim() || formData.enDesc.trim().split(/\s+/).length < 10) {
-            showError('errEnDesc', t('publish_err_desc_en')); valid = false;
+        if (!formData.desc.trim() || formData.desc.trim().length < 20) {
+            showError('errDesc', '请输入作品描述（至少 20 字）'); valid = false;
         }
     }
 
@@ -607,8 +578,7 @@ function showError(id, msg) {
 
 function collectStepData(step) {
     if (step === 1 || step === 3) {
-        const zhTitle = document.getElementById('pubZhTitle');
-        const enTitle = document.getElementById('pubEnTitle');
+        const title   = document.getElementById('pubTitle');
         const zhType  = document.getElementById('pubZhType');
         const enType  = document.getElementById('pubEnType');
         const tech    = document.getElementById('pubTech');
@@ -617,24 +587,21 @@ function collectStepData(step) {
         const currency = document.getElementById('pubCurrency');
         const license = document.getElementById('pubLicense');
 
-        if (zhTitle) formData.zhTitle = zhTitle.value.trim();
-        if (enTitle) formData.enTitle = enTitle.value.trim();
-        if (zhType)  formData.zhType  = zhType.value;
-        if (enType)  formData.enType  = enType.value;
-        if (tech)    formData.tech    = tech.value.trim();
-        if (author)  formData.author  = author.value.trim();
-        if (price)   formData.price   = price.value.trim();
+        if (title)    formData.title   = title.value.trim();
+        if (zhType)   formData.zhType  = zhType.value;
+        if (enType)   formData.enType  = enType.value;
+        if (tech)     formData.tech    = tech.value.trim();
+        if (author)   formData.author  = author.value.trim();
+        if (price)    formData.price   = price.value.trim();
         if (currency) formData.priceCurrency = currency.value;
-        if (license) formData.license = license.value;
+        if (license)  formData.license = license.value;
     }
 
     if (step === 2 || step === 3) {
-        const zhDesc = document.getElementById('pubZhDesc');
-        const enDesc = document.getElementById('pubEnDesc');
+        const desc     = document.getElementById('pubDesc');
         const delivery = document.getElementById('pubDelivery');
 
-        if (zhDesc) formData.zhDesc = zhDesc.value.trim();
-        if (enDesc) formData.enDesc = enDesc.value.trim();
+        if (desc)     formData.desc     = desc.value.trim();
         if (delivery) formData.deliveryMethod = delivery.value;
     }
 }
@@ -650,18 +617,15 @@ function submitPublish() {
     formData.tags = [...tags];
 
     if (isEditMode && editingProductId) {
-        // Update existing product
         updateProduct(editingProductId, {
-            zhTitle: formData.zhTitle,
-            enTitle: formData.enTitle,
+            title: formData.title,
             zhType: formData.zhType,
             enType: formData.enType,
             tech: formData.tech,
             author: formData.author,
             price: formData.price,
             priceCurrency: formData.priceCurrency,
-            zhDesc: formData.zhDesc,
-            enDesc: formData.enDesc,
+            desc: formData.desc,
             tags: formData.tags,
             color: formData.color,
             coverImage: formData.coverImage,
@@ -670,14 +634,13 @@ function submitPublish() {
         });
         closePublishModal();
         renderProducts();
-        alert(`✅ 作品已更新\n\n${formData.zhTitle}`);
+        alert(`✅ 作品已更新\n\n${formData.title}`);
     } else {
-        // Add new product
         addProduct(formData);
         closePublishModal();
         renderProducts();
         const currencySymbol = formData.priceCurrency === 'CNY' ? '¥' : '$';
-        alert(`${t('publish_success')}\n\n${formData.zhTitle}\n${currencySymbol} ${formData.price}`);
+        alert(`${t('publish_success')}\n\n${formData.title}\n${currencySymbol} ${formData.price}`);
     }
 }
 
@@ -706,11 +669,11 @@ function resetForm() {
     isEditMode = false;
     editingProductId = null;
     Object.assign(formData, {
-        zhTitle: "", enTitle: "",
+        title: "",
         zhType: "桌面端软件", enType: "Desktop Software",
         tech: "", author: "",
         price: "", priceCurrency: "CNY",
-        zhDesc: "", enDesc: "",
+        desc: "",
         color: "#141416",
         coverImage: null,
         deliveryMethod: "source",

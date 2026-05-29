@@ -63,7 +63,7 @@ function confirmDeleteProduct(productId) {
     const prod = getProduct(productId);
     if (!prod) return;
 
-    const title = prod.zh?.title || prod.en?.title || 'Untitled';
+    const title = prod.title || 'Untitled';
     if (!confirm(`⚠️ 确定要永久删除「${title}」吗？\n\n此操作不可恢复。`)) return;
 
     removeProduct(productId);

@@ -36,13 +36,13 @@ function refreshModalContent(prod) {
     // 1. Re-apply all [data-i18n] fixed labels inside the modal
     applyLanguage();
 
-    // 2. Update product-specific dynamic fields
-    document.getElementById('modalTitle').innerText = data.title;
+    // 2. Update product-specific fields (title/desc are single-language)
+    document.getElementById('modalTitle').innerText = prod.title;
     document.getElementById('modalType').innerText = data.type;
     document.getElementById('modalPrice').innerText = prod.price;
     document.getElementById('modalTech').innerText = data.tech;
     document.getElementById('modalAuthor').innerText = data.author;
-    document.getElementById('modalDesc').innerText = data.desc;
+    document.getElementById('modalDesc').innerText = prod.desc;
     document.getElementById('modalTextarea').setAttribute('placeholder', t('modal_form_placeholder'));
 
     // 3. Update admin bar (i18n-aware)

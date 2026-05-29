@@ -1,16 +1,18 @@
 /* ============================================
    Products — Data model, CRUD, mock seed data
 
-   Schema (extensible):
+   Schema:
    {
        id: string,
-       zh: { title, type, tech, author, desc, tags[] },
-       en: { title, type, tech, author, desc, tags[] },
+       title: string,            // Product name (single, no zh/en split)
+       desc: string,             // Product description (single)
+       zh: { type, tech, author, tags[] },  // Chinese display values
+       en: { type, tech, author, tags[] },  // English display values
        price: string,
        priceCurrency: "CNY" | "USD",
-       color: string,           // cover background color
-       coverImage: string|null, // Data URL or null → SVG fallback
-       deliveryMethod: string,  // "source" | "binary" | "saas"
+       color: string,            // Cover background color
+       coverImage: string|null,  // Data URL or null → SVG fallback
+       deliveryMethod: string,   // "source" | "binary" | "saas"
        license: string,
        status: "published" | "draft" | "archived",
        createdAt: string,
@@ -22,20 +24,18 @@ let _pidCounter = 3;
 let products = [
     {
         id: "prod_1",
+        title: "MindFlow AI 沉浸式知识库记事本",
+        desc: "专为隐私设计的本地大模型 Markdown 笔记本。采用 Rust 重构打造极致响应速度，帮助用户在完全断网的环境下将碎片文字整理为互联的网状知识图谱，绝无数据泄露风险。",
         zh: {
-            title: "MindFlow AI 沉浸式知识库记事本",
             type: "桌面端软件",
             tech: "Rust / Tailwind",
             author: "Alex_🚀 (美国)",
-            desc: "专为隐私设计的本地大模型 Markdown 笔记本。采用 Rust 重构打造极致响应速度，帮助用户在完全断网的环境下将碎片文字整理为互联的网状知识图谱，绝无数据泄露风险。",
             tags: ["AI", "笔记", "隐私"]
         },
         en: {
-            title: "MindFlow AI Knowledge Workspace",
             type: "Desktop Software",
             tech: "Rust / Tailwind",
             author: "Alex_🚀 (USA)",
-            desc: "A privacy-first Markdown notebook powered by local LLM. Built with Rust for maximum performance. It helps users structure raw text into interconnected node maps entirely offline without data leakage.",
             tags: ["AI", "Notes", "Privacy"]
         },
         price: "$ 29",
@@ -50,20 +50,18 @@ let products = [
     },
     {
         id: "prod_2",
+        title: "PixelPerfect 像素绝对测量插件",
+        desc: "专为前端和UI设计师研发的动态像素对齐工具。支持将UI设计稿以半透明形式直接覆盖于浏览器开发的网页之上，一键智能测量各元素间距差异。",
         zh: {
-            title: "PixelPerfect 像素绝对测量插件",
             type: "浏览器插件/脚本",
             tech: "JavaScript / Chrome API",
             author: "木子李 (中国)",
-            desc: "专为前端和UI设计师研发的动态像素对齐工具。支持将UI设计稿以半透明形式直接覆盖于浏览器开发的网页之上，一键智能测量各元素间距差异。",
             tags: ["前端", "设计", "Chrome"]
         },
         en: {
-            title: "PixelPerfect Pixel Measurement Extension",
             type: "Extension/Script",
             tech: "JavaScript / Chrome API",
             author: "Muzi Li (China)",
-            desc: "A precision alignment extension built for frontend engineers and UI designers. It overlays transparent target mocks onto real-time web instances to measure absolute pixel differences in one click.",
             tags: ["Frontend", "Design", "Chrome"]
         },
         price: "¥ 49",
@@ -90,12 +88,12 @@ const DELIVERY_METHODS = {
 };
 
 const LICENSE_OPTIONS = [
-    { value: "MIT",      label: "MIT" },
-    { value: "Apache-2.0", label: "Apache 2.0" },
-    { value: "GPL-3.0",  label: "GPL 3.0" },
-    { value: "BSD-3",    label: "BSD 3-Clause" },
-    { value: "proprietary", label_zh: "专有许可", label_en: "Proprietary" },
-    { value: "none",     label_zh: "暂无", label_en: "None" }
+    { value: "MIT",          label: "MIT" },
+    { value: "Apache-2.0",   label: "Apache 2.0" },
+    { value: "GPL-3.0",      label: "GPL 3.0" },
+    { value: "BSD-3",        label: "BSD 3-Clause" },
+    { value: "proprietary",  label_zh: "专有许可", label_en: "Proprietary" },
+    { value: "none",         label_zh: "暂无",     label_en: "None" }
 ];
 
 /* ---- CRUD ---- */
@@ -104,20 +102,18 @@ function addProduct(data) {
     const now = new Date().toISOString();
     const product = {
         id: "prod_" + (_pidCounter++),
+        title: data.title || "",
+        desc: data.desc || "",
         zh: {
-            title: data.zhTitle || "",
             type: data.zhType || "",
             tech: data.tech || "",
             author: data.author || "",
-            desc: data.zhDesc || "",
             tags: data.tags || []
         },
         en: {
-            title: data.enTitle || "",
             type: data.enType || "",
             tech: data.tech || "",
             author: data.author || "",
-            desc: data.enDesc || "",
             tags: data.tags || []
         },
         price: data.price || "¥ 0",
@@ -139,22 +135,20 @@ function updateProduct(id, data) {
     if (idx === -1) return null;
     const p = products[idx];
 
-    if (data.zhTitle !== undefined) p.zh.title = data.zhTitle;
-    if (data.enTitle !== undefined) p.en.title = data.enTitle;
-    if (data.zhType !== undefined)   p.zh.type = data.zhType;
-    if (data.enType !== undefined)   p.en.type = data.enType;
-    if (data.tech !== undefined)     { p.zh.tech = data.tech; p.en.tech = data.tech; }
-    if (data.author !== undefined)   { p.zh.author = data.author; p.en.author = data.author; }
-    if (data.zhDesc !== undefined)   p.zh.desc = data.zhDesc;
-    if (data.enDesc !== undefined)   p.en.desc = data.enDesc;
-    if (data.tags !== undefined)     { p.zh.tags = data.tags; p.en.tags = data.tags; }
-    if (data.price !== undefined)    p.price = data.price;
-    if (data.priceCurrency !== undefined) p.priceCurrency = data.priceCurrency;
-    if (data.color !== undefined)    p.color = data.color;
-    if (data.coverImage !== undefined) p.coverImage = data.coverImage;
-    if (data.deliveryMethod !== undefined) p.deliveryMethod = data.deliveryMethod;
-    if (data.license !== undefined)  p.license = data.license;
-    if (data.status !== undefined)   p.status = data.status;
+    if (data.title !== undefined)           p.title = data.title;
+    if (data.desc !== undefined)            p.desc = data.desc;
+    if (data.zhType !== undefined)          p.zh.type = data.zhType;
+    if (data.enType !== undefined)          p.en.type = data.enType;
+    if (data.tech !== undefined)            { p.zh.tech = data.tech; p.en.tech = data.tech; }
+    if (data.author !== undefined)          { p.zh.author = data.author; p.en.author = data.author; }
+    if (data.tags !== undefined)            { p.zh.tags = data.tags; p.en.tags = data.tags; }
+    if (data.price !== undefined)           p.price = data.price;
+    if (data.priceCurrency !== undefined)   p.priceCurrency = data.priceCurrency;
+    if (data.color !== undefined)           p.color = data.color;
+    if (data.coverImage !== undefined)      p.coverImage = data.coverImage;
+    if (data.deliveryMethod !== undefined)  p.deliveryMethod = data.deliveryMethod;
+    if (data.license !== undefined)         p.license = data.license;
+    if (data.status !== undefined)          p.status = data.status;
 
     p.updatedAt = new Date().toISOString();
     return p;

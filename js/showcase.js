@@ -24,11 +24,11 @@ function renderProducts(filter) {
             <div class="showcase-card" onclick="window.openItemDetailByID('${prod.id}')">
                 <div class="cover-wrapper">
                     ${prod.coverImage
-                        ? `<img class="cover-img" src="${prod.coverImage}" alt="${data.title}" />`
+                        ? `<img class="cover-img" src="${prod.coverImage}" alt="${prod.title}" />`
                         : `<svg class="cover-img" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
                             <rect width="100%" height="100%" fill="${prod.color}" />
                             <text x="50%" y="50%" fill="#f97316" font-size="20" font-weight="bold" text-anchor="middle">
-                                ${data.title}
+                                ${prod.title}
                             </text>
                         </svg>`
                     }
@@ -36,7 +36,7 @@ function renderProducts(filter) {
                 </div>
                 <div class="card-info">
                     <div class="card-header">
-                        <h3 class="card-title">${data.title}</h3>
+                        <h3 class="card-title">${prod.title}</h3>
                         <span class="card-type">${data.type}</span>
                     </div>
                     <div class="card-footer">
