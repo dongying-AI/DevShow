@@ -61,7 +61,7 @@ function openPublishEdit(productId) {
 
     isEditMode = true;
     editingProductId = productId;
-    tags = [...(prod.zh.tags || [])];
+    tags = [...(prod.tags || [])];
 
     // Pre-fill formData from existing product
     Object.assign(formData, {
