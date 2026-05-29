@@ -612,7 +612,14 @@ function submitPublish() {
         });
         closePublishModal();
         renderProducts();
-        alert(`✅ 作品已更新\n\n${formData.title}`);
+
+        // Re-open detail modal after edit
+        const savedId = editingProductId;
+        setTimeout(() => {
+            if (typeof window.openItemDetailByID === 'function') {
+                window.openItemDetailByID(savedId);
+            }
+        }, 100);
     } else {
         addProduct(formData);
         closePublishModal();
