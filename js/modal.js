@@ -3,7 +3,7 @@
    ============================================ */
 
 import { getProduct } from './products.js';
-import { currentLang, t } from './i18n.js';
+import { currentLang, t, applyLanguage } from './i18n.js';
 
 let activeColor = "#141416";
 let lastOpenedProductId = null;
@@ -32,6 +32,11 @@ function openModal(productId) {
  */
 function refreshModalContent(prod) {
     const data = prod[currentLang];
+
+    // 1. Re-apply all [data-i18n] fixed labels inside the modal
+    applyLanguage();
+
+    // 2. Update product-specific dynamic fields
     document.getElementById('modalTitle').innerText = data.title;
     document.getElementById('modalType').innerText = data.type;
     document.getElementById('modalPrice').innerText = prod.price;
@@ -39,6 +44,9 @@ function refreshModalContent(prod) {
     document.getElementById('modalAuthor').innerText = data.author;
     document.getElementById('modalDesc').innerText = data.desc;
     document.getElementById('modalTextarea').setAttribute('placeholder', t('modal_form_placeholder'));
+
+    // 3. Update admin bar (i18n-aware)
+    updateAdminBarStatus(prod);
 }
 
 /**
@@ -119,7 +127,9 @@ function updateAdminBarStatus(prod) {
     const delistBtn = document.getElementById('adminDelistBtn');
     if (delistBtn) {
         const isArchived = prod.status === 'archived';
-        delistBtn.innerText = isArchived ? '上架' : '下架';
+        const key = isArchived ? 'admin_btn_relist' : 'admin_btn_delist';
+        delistBtn.setAttribute('data-i18n', key);
+        delistBtn.innerText = t(key);
         delistBtn.style.background = isArchived ? 'var(--color-success)' : '#b45309';
     }
 }
@@ -130,7 +140,10 @@ function updateAdminBarStatus(prod) {
 function refreshModalOnLangChange() {
     if (lastOpenedProductId !== null && document.getElementById('detailModal').classList.contains('open')) {
         const prod = getProduct(lastOpenedProductId);
-        if (prod) refreshModalContent(prod);
+        if (prod) {
+            refreshModalContent(prod);
+            renderGalleryImages(prod);
+        }
     }
 }
 
