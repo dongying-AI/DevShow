@@ -3,7 +3,7 @@
    ============================================ */
 
 import { getProduct } from './products.js';
-import { currentLang, t, applyLanguage } from './i18n.js';
+import { t, applyLanguage } from './i18n.js';
 
 let activeColor = "#141416";
 let lastOpenedProductId = null;
@@ -31,17 +31,15 @@ function openModal(productId) {
  * Refresh modal text based on current language & product data.
  */
 function refreshModalContent(prod) {
-    const data = prod[currentLang];
-
     // 1. Re-apply all [data-i18n] fixed labels inside the modal
     applyLanguage();
 
-    // 2. Update product-specific fields (title/desc are single-language)
+    // 2. Update product-specific fields (all flat after refactor)
     document.getElementById('modalTitle').innerText = prod.title;
     document.getElementById('modalType').innerText = prod.type;
     document.getElementById('modalPrice').innerText = prod.price;
-    document.getElementById('modalTech').innerText = data.tech;
-    document.getElementById('modalAuthor').innerText = data.author;
+    document.getElementById('modalTech').innerText = prod.tech;
+    document.getElementById('modalAuthor').innerText = prod.author;
     document.getElementById('modalDesc').innerText = prod.desc;
     document.getElementById('modalTextarea').setAttribute('placeholder', t('modal_form_placeholder'));
 
