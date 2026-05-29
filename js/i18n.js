@@ -91,7 +91,12 @@ const langDict = {
         publish_err_desc_en: "请输入英文描述（至少 10 words）",
         publish_err_price: "请输入有效价格",
         publish_err_image_size: "图片大小不能超过 1MB",
-        publish_success: "🎉 作品登记成功！\n已展示在首页橱窗中。"
+        publish_success: "🎉 作品登记成功！\n已展示在首页橱窗中。",
+        publish_edit_title: "✏️ 编辑作品",
+        admin_delist_ok: "✅ 作品已下架",
+        admin_relist_ok: "✅ 作品已上架",
+        admin_delete_confirm: "⚠️ 确定要永久删除作品吗？此操作不可恢复。",
+        admin_delete_ok: "🗑️ 作品已删除"
     },
     en: {
         doc_title: "DevShow | Global Indie Products Connection Showcase",
@@ -181,7 +186,12 @@ const langDict = {
         publish_err_desc_en: "English description required (min 10 words)",
         publish_err_price: "Please enter a valid price",
         publish_err_image_size: "Image must be under 1MB",
-        publish_success: "🎉 Product registered successfully!\nNow visible in the showcase."
+        publish_success: "🎉 Product registered successfully!\nNow visible in the showcase.",
+        publish_edit_title: "✏️ Edit Product",
+        admin_delist_ok: "✅ Product delisted",
+        admin_relist_ok: "✅ Product relisted",
+        admin_delete_confirm: "⚠️ Are you sure you want to permanently delete this product? This cannot be undone.",
+        admin_delete_ok: "🗑️ Product deleted"
     }
 };
 

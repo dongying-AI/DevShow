@@ -269,11 +269,11 @@
                 </span>
                 <div style="display:flex; gap:10px;">
                     <button class="btn btn-secondary" style="font-size:11px; padding:4px 12px;"
-                        onclick="alert('Manage Frame Activated')" data-i18n="admin_btn_edit">编辑修改</button>
-                    <button class="btn btn-secondary" style="font-size:11px; padding:4px 12px; background:#b45309; color:#fff;"
-                        onclick="alert('Asset Shelved')" data-i18n="admin_btn_delist">下架</button>
+                            onclick="editProduct(getLastOpenedProductId())" data-i18n="admin_btn_edit">编辑修改</button>
+                    <button class="btn btn-secondary" id="adminDelistBtn" style="font-size:11px; padding:4px 12px; background:#b45309; color:#fff;"
+                            onclick="toggleDelist(getLastOpenedProductId())" data-i18n="admin_btn_delist">下架</button>
                     <button class="btn" style="font-size:11px; padding:4px 12px; background:var(--color-danger); color:#fff; border-radius:30px;"
-                        onclick="confirm('Destroy Code Asset?') && closeModal()" data-i18n="admin_btn_delete">删除</button>
+                            onclick="confirmDeleteProduct(getLastOpenedProductId())" data-i18n="admin_btn_delete">删除</button>
                 </div>
             </div>
 

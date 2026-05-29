@@ -9,6 +9,7 @@ import { refreshModalOnLangChange } from './modal.js';
 import { setupCogOutsideClick } from './settings.js';
 import { refreshCardLocks } from './header.js';
 import { openPublishModal, refreshFormI18n } from './publish.js';
+import './admin.js';  // Side-effect import: binds window.editProduct etc.
 
 /**
  * Language switcher — called from HTML select onchange.

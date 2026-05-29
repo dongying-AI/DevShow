@@ -23,6 +23,7 @@ function openModal(productId) {
     switchModalThumb(0);
 
     document.getElementById('ownerAdminZone').style.display = "flex";
+    updateAdminBarStatus(prod);
     document.getElementById('detailModal').classList.add('open');
 }
 
@@ -100,6 +101,30 @@ function closeModal() {
 window.closeModal = closeModal;
 
 /**
+ * Refresh detail modal in-place (used after admin actions like delist).
+ */
+function refreshDetailModal() {
+    if (!lastOpenedProductId) return;
+    const prod = getProduct(lastOpenedProductId);
+    if (!prod) return;
+    refreshModalContent(prod);
+    renderGalleryImages(prod);
+    updateAdminBarStatus(prod);
+}
+
+/**
+ * Update the delist button label based on product status.
+ */
+function updateAdminBarStatus(prod) {
+    const delistBtn = document.getElementById('adminDelistBtn');
+    if (delistBtn) {
+        const isArchived = prod.status === 'archived';
+        delistBtn.innerText = isArchived ? '上架' : '下架';
+        delistBtn.style.background = isArchived ? 'var(--color-success)' : '#b45309';
+    }
+}
+
+/**
  * Re-render modal when language changes while open.
  */
 function refreshModalOnLangChange() {
@@ -117,5 +142,7 @@ function triggerSubmitInquiry() {
     document.getElementById('modalTextarea').value = "";
 }
 window.triggerSubmitInquiry = triggerSubmitInquiry;
+window.refreshDetailModal = refreshDetailModal;
+window.getLastOpenedProductId = () => lastOpenedProductId;
 
-export { openModal, refreshModalOnLangChange };
+export { openModal, refreshModalOnLangChange, lastOpenedProductId };

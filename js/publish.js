@@ -5,7 +5,8 @@
 
 import { currentLang, t } from './i18n.js';
 import {
-    addProduct, PRODUCT_TYPES, DELIVERY_METHODS,
+    addProduct, updateProduct, getProduct,
+    PRODUCT_TYPES, DELIVERY_METHODS,
     LICENSE_OPTIONS
 } from './products.js';
 import { renderProducts } from './showcase.js';
@@ -20,6 +21,8 @@ const COLOR_PRESETS = [
 /* === State === */
 let currentStep = 1;
 let tags = [];
+let isEditMode = false;
+let editingProductId = null;
 
 /* === Form Data Object === */
 const formData = {
@@ -49,10 +52,53 @@ function openPublishModal() {
 }
 
 /**
+ * Open the publish modal in edit mode with pre-filled data.
+ * @param {string} productId
+ */
+function openPublishEdit(productId) {
+    const prod = getProduct(productId);
+    if (!prod) return;
+
+    isEditMode = true;
+    editingProductId = productId;
+    tags = [...(prod.zh.tags || [])];
+
+    // Pre-fill formData from existing product
+    Object.assign(formData, {
+        zhTitle: prod.zh.title,
+        enTitle: prod.en.title,
+        zhType: prod.zh.type,
+        enType: prod.en.type,
+        tech: prod.zh.tech,
+        author: prod.zh.author,
+        price: prod.price.replace(/[¥$ ]/g, ''),
+        priceCurrency: prod.priceCurrency,
+        zhDesc: prod.zh.desc,
+        enDesc: prod.en.desc,
+        color: prod.color,
+        coverImage: prod.coverImage,
+        deliveryMethod: prod.deliveryMethod,
+        license: prod.license
+    });
+
+    // Update header title to reflect edit mode
+    const header = document.querySelector('.publish-header h2');
+    if (header) header.innerText = '✏️ 编辑作品';
+
+    document.getElementById('publishOverlay').classList.add('open');
+    renderStep(1);
+}
+
+window.openPublishEdit = openPublishEdit;
+
+/**
  * Close the publish modal.
  */
 function closePublishModal() {
     document.getElementById('publishOverlay').classList.remove('open');
+    // Restore header title
+    const header = document.querySelector('.publish-header h2');
+    if (header) header.innerText = '📤 登记新作品';
 }
 window.closePublishModal = closePublishModal;
 
@@ -603,12 +649,36 @@ function submitPublish() {
 
     formData.tags = [...tags];
 
-    addProduct(formData);
-    closePublishModal();
-    renderProducts();
-
-    const currencySymbol = formData.priceCurrency === 'CNY' ? '¥' : '$';
-    alert(`${t('publish_success')}\n\n${formData.zhTitle}\n${currencySymbol} ${formData.price}`);
+    if (isEditMode && editingProductId) {
+        // Update existing product
+        updateProduct(editingProductId, {
+            zhTitle: formData.zhTitle,
+            enTitle: formData.enTitle,
+            zhType: formData.zhType,
+            enType: formData.enType,
+            tech: formData.tech,
+            author: formData.author,
+            price: formData.price,
+            priceCurrency: formData.priceCurrency,
+            zhDesc: formData.zhDesc,
+            enDesc: formData.enDesc,
+            tags: formData.tags,
+            color: formData.color,
+            coverImage: formData.coverImage,
+            deliveryMethod: formData.deliveryMethod,
+            license: formData.license
+        });
+        closePublishModal();
+        renderProducts();
+        alert(`✅ 作品已更新\n\n${formData.zhTitle}`);
+    } else {
+        // Add new product
+        addProduct(formData);
+        closePublishModal();
+        renderProducts();
+        const currencySymbol = formData.priceCurrency === 'CNY' ? '¥' : '$';
+        alert(`${t('publish_success')}\n\n${formData.zhTitle}\n${currencySymbol} ${formData.price}`);
+    }
 }
 
 /* ================================================================
@@ -633,6 +703,8 @@ function esc(str) {
 function resetForm() {
     currentStep = 1;
     tags = [];
+    isEditMode = false;
+    editingProductId = null;
     Object.assign(formData, {
         zhTitle: "", enTitle: "",
         zhType: "桌面端软件", enType: "Desktop Software",
