@@ -1,0 +1,36 @@
+/* ============================================
+   Header / Navigation
+   Sticky with backdrop blur
+   ============================================ */
+
+header {
+    border-bottom: 1px solid var(--border-line);
+    background-color: var(--bg-header);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(16px);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+}
+
+.logo span {
+    color: var(--color-accent);
+}
+
+.user-status {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}

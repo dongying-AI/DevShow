@@ -1,0 +1,50 @@
+/* ============================================
+   Promo / Value Proposition Section
+   Two-column feature highlights
+   ============================================ */
+
+.promo-section {
+    padding: 70px 0;
+    background-color: var(--bg-main);
+}
+
+.promo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+}
+
+.promo-box {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-line);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.promo-box h3 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.03em;
+}
+
+.promo-box p {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    margin-bottom: 22px;
+    line-height: 1.7;
+}
+
+.promo-box ul {
+    list-style: none;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.promo-box ul li {
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}

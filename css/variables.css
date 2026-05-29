@@ -1,0 +1,44 @@
+/* ============================================
+   DevShow Design Tokens & CSS Variables
+   Theme: Deep dark base + warm orange accent
+   ============================================ */
+
+:root[data-theme="dark"] {
+    --bg-main: #09090b;
+    --bg-panel: #141416;
+    --bg-header: rgba(9, 9, 11, 0.8);
+    --text-primary: #f4f4f5;
+    --text-secondary: #71717a;
+    --color-accent: #f97316;
+    --color-accent-hover: #ea580c;
+    --color-price: #f97316;
+    --border-line: #27272a;
+    --bg-badge: rgba(249, 115, 22, 0.1);
+    --color-danger: #ef4444;
+    --color-success: #10b981;
+    --bg-modal: rgba(0, 0, 0, 0.9);
+    --cog-bg: #202023;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+:root[data-theme="light"] {
+    --bg-main: #fafafa;
+    --bg-panel: #ffffff;
+    --bg-header: rgba(255, 255, 255, 0.85);
+    --text-primary: #18181b;
+    --text-secondary: #888883;
+    --color-accent: #ea580c;
+    --color-accent-hover: #c2410c;
+    --color-price: #ea580c;
+    --border-line: #e4e4e7;
+    --bg-badge: rgba(234, 88, 12, 0.05);
+    --color-danger: #dc2626;
+    --color-success: #16a34a;
+    --bg-modal: rgba(24, 24, 27, 0.4);
+    --cog-bg: #ffffff;
+    --card-shadow: 0 10px 25px rgba(24, 24, 27, 0.06);
+    --glass-bg: rgba(0, 0, 0, 0.02);
+    --glass-border: rgba(0, 0, 0, 0.05);
+}

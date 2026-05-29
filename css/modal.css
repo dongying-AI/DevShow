@@ -1,0 +1,198 @@
+/* ============================================
+   Product Detail Modal
+   Full gallery + specs + inquiry form
+   ============================================ */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-modal);
+    backdrop-filter: blur(16px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.modal-container {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-line);
+    width: 92%;
+    max-width: 1040px;
+    border-radius: 16px;
+    padding: 35px;
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+.close-modal {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    font-size: 28px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: var(--text-primary);
+}
+
+/* --- Gallery --- */
+.mall-main-profile {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.main-preview-window {
+    position: relative;
+    width: 100%;
+    padding-top: 133.33%;
+    background: #020203;
+    border-radius: 8px;
+    border: 1px solid var(--border-line);
+    overflow: hidden;
+}
+
+.main-preview-window .img-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.thumb-list {
+    display: flex;
+    gap: 10px;
+}
+
+.thumb-item {
+    width: 60px;
+    height: 80px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 0.4;
+    transition: all 0.2s;
+}
+
+.thumb-item.active {
+    border-color: var(--color-accent);
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* --- Specs Panel --- */
+.mall-specs-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mall-price-card {
+    background: var(--bg-badge);
+    border: 1px dashed var(--color-accent);
+    padding: 18px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.specs-param-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    font-size: 14px;
+    background: var(--bg-main);
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-line);
+}
+
+/* --- Admin Bar --- */
+.owner-admin-bar {
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    padding: 14px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- Description Section --- */
+.mall-detailed-description {
+    margin-top: 40px;
+    border-top: 1px solid var(--border-line);
+    padding-top: 30px;
+}
+
+.desc-tab-header {
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: 3px solid var(--color-accent);
+    display: inline-block;
+    padding-bottom: 6px;
+    margin-bottom: 18px;
+}
+
+.desc-rich-box {
+    background: var(--bg-main);
+    border: 1px solid var(--border-line);
+    padding: 26px;
+    border-radius: 8px;
+    font-size: 14.5px;
+    line-height: 1.7;
+}
+
+/* --- Inquiry Form --- */
+.message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg-main);
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border-line);
+}
+
+.message-input {
+    width: 100%;
+    height: 85px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-line);
+    color: var(--text-primary);
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 13.5px;
+    resize: none;
+    outline: none;
+}
+
+.message-input:focus {
+    border-color: var(--color-accent);
+}
+
+/* Modal overlay show state */
+.modal-overlay.open {
+    display: flex;
+}

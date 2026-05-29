@@ -1,0 +1,89 @@
+/* ============================================
+   Base Reset & Global Styles
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    letter-spacing: -0.03em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --- Shared Button Styles --- */
+.btn {
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+
+:root[data-theme="dark"] .btn-primary {
+    color: #09090b;
+    background-color: #f97316;
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-line);
+}
+
+.btn-secondary:hover {
+    background-color: var(--glass-bg);
+    border-color: var(--text-secondary);
+}
+
+/* --- Status Badge --- */
+.status-badge {
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 30px;
+    background-color: rgba(239, 68, 68, 0.08);
+    color: var(--color-danger);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    font-weight: 500;
+}
+
+.status-badge.logged-in {
+    background-color: rgba(16, 185, 129, 0.08);
+    color: var(--color-success);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}

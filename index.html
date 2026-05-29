@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark" data-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="doc_title">DevShow | 全球独立数字化成果交易与直连橱窗</title>
+
+    <!-- ====== CSS Modules ====== -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/filter-bar.css">
+    <link rel="stylesheet" href="css/showcase.css">
+    <link rel="stylesheet" href="css/testimonials.css">
+    <link rel="stylesheet" href="css/promo.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/publish.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!--  1. Header / Navigation                                            -->
+    <!-- ================================================================ -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Dev<span>Show</span></a>
+            <div class="user-status">
+                <button id="publishBtn" class="btn btn-secondary"
+                    style="display:none; border:1px solid var(--color-accent); color:var(--color-accent);"
+                    onclick="triggerPublish()" data-i18n="btn_publish">
+                    ➕ 登记我的作品
+                </button>
+                <span id="loginStatusLabel" class="status-badge" data-i18n="status_unlogged">
+                    未登录 (仅限浏览首页Top20)
+                </span>
+                <button id="authBtn" class="btn btn-primary" onclick="toggleLogin()" data-i18n="btn_login_mock">
+                    模拟登录平台
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================================================================ -->
+    <!--  2. Hero Section                                                   -->
+    <!-- ================================================================ -->
+    <section class="hero">
+        <div class="container">
+            <h1 data-i18n="hero_title">全球独立数字化成果展示大厅</h1>
+            <p data-i18n="hero_desc">
+                零中介费、全生态直连。未登录用户仅可公开预览最新 Top 20 创新展品的封面形态。
+            </p>
+            <p id="visitorTip" class="visitor-tip" data-i18n="visitor_tip">
+                ⚠️ 提示：您当前尚未登录，点击任何卡片都无法查看产品详情和内置翻译留言框。
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!--  3. Showcase: Filter Bar + Product Grid                            -->
+    <!-- ================================================================ -->
+    <div class="container showcase-body">
+        <div class="filter-bar">
+            <div class="filter-tags">
+                <span class="active" data-i18n="tag_top20">最新Top 20展示面</span>
+                <span data-i18n="tag_web">Web网站/SaaS</span>
+                <span data-i18n="tag_app">移动端App</span>
+                <span data-i18n="tag_mini">微信/原生小程序</span>
+                <span data-i18n="tag_pc">桌面端软件</span>
+                <span data-i18n="tag_plugin">浏览器插件/脚本</span>
+            </div>
+            <div class="filter-spec" data-i18n="img_specification">
+                全站严格遵循 3:4 &lt; 1MB 限制
+            </div>
+        </div>
+
+        <div class="showcase-grid" id="showcaseGrid">
+            <!-- Rendered dynamically by js/showcase.js -->
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!--  4. Testimonials / Review Marquee                                  -->
+    <!-- ================================================================ -->
+    <section class="testimonials-wrapper">
+        <h2 class="section-title" data-i18n="review_title">
+            来自 <span>全球创作者与买家</span> 的真实反馈
+        </h2>
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <!-- Review Card 1 -->
+                <div class="review-card">
+                    <div class="review-user">
+                        <div class="review-avatar">TH</div>
+                        <div class="review-user-info">
+                            <h5>Thomas H.</h5>
+                            <p data-i18n="review_user1_sub">SaaS Boilerplate | 🇺🇸 美国</p>
+                        </div>
+                    </div>
+                    <p class="review-content" data-i18n="review_user1_content">
+                        "在对话中隐藏联系方式后，通过平台自动翻译私信，我居然成功把代码资产转让给了一位中国买家。无界交流的体验太棒了！"
+                    </p>
+                </div>
+                <!-- Review Card 2 -->
+                <div class="review-card">
+                    <div class="review-user">
+                        <div class="review-avatar" style="color:var(--color-success);">老</div>
+                        <div class="review-user-info">
+                            <h5 data-i18n="review_user2_name">老齐 (个人创作者)</h5>
+                            <p data-i18n="review_user2_sub">自动化同步脚本 | 🇨🇳 中国</p>
+                        </div>
+                    </div>
+                    <p class="review-content" data-i18n="review_user2_content">
+                        "平台的 3:4 瀑布流封面视觉极具高级感。最让人安心的是未登录时隐藏全部核心数据，防自动化爬虫效果拉满！"
+                    </p>
+                </div>
+                <!-- Review Card 3 -->
+                <div class="review-card">
+                    <div class="review-user">
+                        <div class="review-avatar" style="color:#a855f7;">KM</div>
+                        <div class="review-user-info">
+                            <h5>Kenji M.</h5>
+                            <p data-i18n="review_user3_sub">资产独立采购商 | 🇯🇵 日本</p>
+                        </div>
+                    </div>
+                    <p class="review-content" data-i18n="review_user3_content">
+                        "虽然看中的工具作者是中国人，但我直接写日语询盘，对方在系统后台收到后无缝沟通，非常赞的技术媒介！"
+                    </p>
+                </div>
+
+                <!-- ===== Clone group for seamless infinite loop ===== -->
+                <div class="review-card">
+                    <div class="review-user">
+                        <div class="review-avatar">TH</div>
+                        <div class="review-user-info">
+                            <h5>Thomas H.</h5>
+                            <p data-i18n="review_user1_sub">SaaS Boilerplate | 🇺🇸 美国</p>
+                        </div>
+                    </div>
+                    <p class="review-content" data-i18n="review_user1_content">
+                        "在对话中隐藏联系方式后，通过平台自动翻译私信，我居然成功把代码资产转让给了一位中国买家。无界交流的体验太棒了！"
+                    </p>
+                </div>
+                <div class="review-card">
+                    <div class="review-user">
+                        <div class="review-avatar" style="color:var(--color-success);">老</div>
+                        <div class="review-user-info">
+                            <h5 data-i18n="review_user2_name">老齐 (个人创作者)</h5>
+                            <p data-i18n="review_user2_sub">自动化同步脚本 | 🇨🇳 中国</p>
+                        </div>
+                    </div>
+                    <p class="review-content" data-i18n="review_user2_content">
+                        "平台的 3:4 瀑布流封面视觉极具高级感。最让人安心的是未登录时隐藏全部核心数据，防自动化爬虫效果拉满！"
+                    </p>
+                </div>
+                <div class="review-card">
+                    <div class="review-user">
+                        <div class="review-avatar" style="color:#a855f7;">KM</div>
+                        <div class="review-user-info">
+                            <h5>Kenji M.</h5>
+                            <p data-i18n="review_user3_sub">资产独立采购商 | 🇯🇵 日本</p>
+                        </div>
+                    </div>
+                    <p class="review-content" data-i18n="review_user3_content">
+                        "虽然看中的工具作者是中国人，但我直接写日语询盘，对方在系统后台收到后无缝沟通，非常赞的技术媒介！"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!--  5. Promo / Value Proposition                                      -->
+    <!-- ================================================================ -->
+    <section class="promo-section container">
+        <div class="promo-grid">
+            <div class="promo-box">
+                <h3 data-i18n="promo_box1_title">为什么全面隐藏私人联系方式？</h3>
+                <p data-i18n="promo_box1_desc">
+                    将微信或公开邮箱暴露在互联网公网上，往往会给独立创作者招致无穷无尽的定向广告和爬虫。内置留信箱提供绝佳的安全隔离：
+                </p>
+                <ul>
+                    <li data-i18n="promo_box1_li1">📌 <strong>高效防噪</strong>：只有对你展出功能存在明确合作意向的用户才能发起首次留信。</li>
+                    <li data-i18n="promo_box1_li2">📌 <strong>全时防漏</strong>：信息云端存储，无论对方处于何种时区，上线即可统一在后台查收。</li>
+                </ul>
+            </div>
+            <div class="promo-box">
+                <h3 data-i18n="promo_box2_title">AI 实时翻译：让好作品走向全球</h3>
+                <p data-i18n="promo_box2_desc">
+                    优秀的成果与代码从来都不分国界，但琐碎的语种隔阂往往让跨国协作夭折。DevShow 打通了无感知翻译管道：
+                </p>
+                <ul>
+                    <li data-i18n="promo_box2_li1">📌 <strong>一键跨国看懂</strong>：面对海外开发者的优秀成品，轻点一下，即可无损转化为你的母语陈述。</li>
+                    <li data-i18n="promo_box2_li2">📌 <strong>双向母语留信</strong>：海外买家使用英文输入意向，你的收件箱会自动为您备好完美的中文译文。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!--  6. Product Detail Modal                                           -->
+    <!-- ================================================================ -->
+    <div id="detailModal" class="modal-overlay">
+        <div class="modal-container">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+
+            <!-- Gallery + Specs -->
+            <div class="mall-main-profile">
+                <!-- Gallery -->
+                <div class="gallery-container">
+                    <div class="main-preview-window">
+                        <div id="mainModalImgHolder" class="img-holder"></div>
+                        <span class="img-size-badge" style="background:var(--color-success); color:#09090b;">
+                            3:4 Limit &lt; 1MB OK
+                        </span>
+                    </div>
+                    <div class="thumb-list">
+                        <div class="thumb-item active" onclick="switchModalThumb(0)"><div id="thumb0"></div></div>
+                        <div class="thumb-item" onclick="switchModalThumb(1)"><div id="thumb1"></div></div>
+                        <div class="thumb-item" onclick="switchModalThumb(2)"><div id="thumb2"></div></div>
+                        <div class="thumb-item" onclick="switchModalThumb(3)"><div id="thumb3"></div></div>
+                        <div class="thumb-item" onclick="switchModalThumb(4)"><div id="thumb4"></div></div>
+                    </div>
+                </div>
+
+                <!-- Specs Panel -->
+                <div class="mall-specs-panel">
+                    <div>
+                        <span id="modalType" class="card-type" style="margin-bottom:6px; display:inline-block;">-</span>
+                        <h2 id="modalTitle" style="font-size:22px; font-weight:800;">-</h2>
+                    </div>
+                    <div class="mall-price-card">
+                        <div>
+                            <span style="font-size:11px; color:var(--text-secondary);" data-i18n="modal_price_label">
+                                创作者期望售价
+                            </span>
+                            <div id="modalPrice" style="font-size:24px; font-weight:800; color:var(--color-price);">
+                                ¥ 0
+                            </div>
+                        </div>
+                        <span style="font-size:11px; background:var(--border-line); padding:4px 8px; border-radius:4px;"
+                            data-i18n="modal_delivery_tag">成品交付 / 附源码</span>
+                    </div>
+                    <div class="specs-param-grid">
+                        <div><span data-i18n="modal_param_arch">架构: </span><span id="modalTech" style="font-weight:600;">-</span></div>
+                        <div><span data-i18n="modal_param_author">作者: </span><span id="modalAuthor" style="font-weight:600; color:var(--color-accent);">-</span></div>
+                    </div>
+                    <div class="message-form">
+                        <span style="font-size:12px; font-weight:600;" data-i18n="modal_form_title">
+                            🌐 快捷发送询盘留言 (支持机器互译)
+                        </span>
+                        <textarea class="message-input" id="modalTextarea"
+                            data-i18n-placeholder="modal_form_placeholder"
+                            placeholder="输入你想咨询的合作方向..."></textarea>
+                        <button class="btn btn-primary"
+                            style="width:100%; padding:10px; font-size:13px; justify-content: center;"
+                            onclick="triggerSubmitInquiry()"
+                            data-i18n="modal_btn_submit">发送加密询盘</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Zone -->
+            <div id="ownerAdminZone" class="owner-admin-bar" style="display:none; margin-top:20px;">
+                <span style="font-size:12px; font-weight:bold;" data-i18n="admin_bar_title">
+                    🛠️ 资产管理特权控制组：
+                </span>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-secondary" style="font-size:11px; padding:4px 12px;"
+                        onclick="alert('Manage Frame Activated')" data-i18n="admin_btn_edit">编辑修改</button>
+                    <button class="btn btn-secondary" style="font-size:11px; padding:4px 12px; background:#b45309; color:#fff;"
+                        onclick="alert('Asset Shelved')" data-i18n="admin_btn_delist">下架</button>
+                    <button class="btn" style="font-size:11px; padding:4px 12px; background:var(--color-danger); color:#fff; border-radius:30px;"
+                        onclick="confirm('Destroy Code Asset?') && closeModal()" data-i18n="admin_btn_delete">删除</button>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mall-detailed-description">
+                <div class="desc-tab-header" data-i18n="modal_desc_header">📄 功能陈述详情长页</div>
+                <div class="desc-rich-box"><p id="modalDesc">-</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!--  7. Product Publish Modal                                          -->
+    <!-- ================================================================ -->
+    <div id="publishOverlay" class="publish-overlay">
+        <div class="publish-container">
+            <div class="publish-header">
+                <h2 data-i18n="publish_title">📤 登记新作品</h2>
+                <button class="publish-close" onclick="closePublishModal()">&times;</button>
+            </div>
+
+            <!-- Steps indicator -->
+            <div class="publish-steps">
+                <div class="publish-step active" id="pubStep1">
+                    <span class="step-num">1</span><span data-i18n="publish_step1">基本信息</span>
+                </div>
+                <div class="publish-step" id="pubStep2">
+                    <span class="step-num">2</span><span data-i18n="publish_step2">作品描述</span>
+                </div>
+                <div class="publish-step" id="pubStep3">
+                    <span class="step-num">3</span><span data-i18n="publish_step3">视觉确认</span>
+                </div>
+            </div>
+
+            <!-- Dynamic step content -->
+            <div id="publishStepContent"></div>
+
+            <!-- Footer buttons -->
+            <div class="publish-footer">
+                <button class="btn btn-secondary" onclick="closePublishModal()"
+                        data-i18n="publish_btn_cancel">取消</button>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" id="publishBackBtn"
+                            onclick="goToStep(pubCurrentStep - 1)"
+                            style="display:none;" data-i18n="publish_btn_back">← 上一步</button>
+                    <button class="btn btn-primary" id="publishNextBtn"
+                            onclick="goToStep(pubCurrentStep + 1)"
+                            data-i18n="publish_btn_next">下一步 →</button>
+                    <button class="btn btn-primary" id="publishSubmitBtn"
+                            onclick="submitPublish()" style="display:none;"
+                            data-i18n="publish_btn_submit">✅ 提交登记</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!--  8. Floating Settings Cog                                          -->
+    <!-- ================================================================ -->
+    <div class="cog-settings-wrapper" id="cogWrapper">
+        <button class="cog-btn" id="cogBtn" onclick="toggleCogPopover(event)" title="Settings">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+            </svg>
+        </button>
+        <div class="cog-popover" id="cogPopover" onclick="event.stopPropagation()">
+            <div class="ctrl-row">
+                <span class="ctrl-title" data-i18n="setting_theme_title">🎨 界面主题切换</span>
+                <select class="select-input" onchange="changeTheme(this.value)">
+                    <option value="dark" data-i18n="opt_theme_dark">🌙 极客暗黑 (Dark)</option>
+                    <option value="light" data-i18n="opt_theme_light">☀️ 复古浅色 (Light)</option>
+                </select>
+            </div>
+            <div class="ctrl-row">
+                <span class="ctrl-title" data-i18n="setting_lang_title">🌐 语言显示切换</span>
+                <select class="select-input" onchange="changeLang(this.value)">
+                    <option value="zh">🇨🇳 简体中文 (Chinese)</option>
+                    <option value="en">🇺🇸 English (英文)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!--  9. Footer                                                         -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="container">
+            <p data-i18n="footer_copyright">
+                © 2026 DevShow 独立作品橱窗. 让全球的代码资产无界连接.
+            </p>
+            <p class="disclaimer" data-i18n="footer_disclaimer">
+                <strong>平台重要合规声明：</strong> DevShow 仅充当数字化成品的功能展示与多语言留言翻译的技术媒介。平台**不是**担保交易中介，本身不介入任何线下资金链。买卖双方通过平台留言建立信任后，请自行审慎评估后续的软件交付、定制流程及支付方式，并自行承担全部交易风险。
+            </p>
+        </div>
+    </footer>
+
+    <!-- ====== JS Entry Point (ES Module) ====== -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

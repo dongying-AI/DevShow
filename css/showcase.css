@@ -1,0 +1,119 @@
+/* ============================================
+   Showcase Grid & Product Cards
+   3:4 ratio covers, glass cards
+   ============================================ */
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.showcase-card {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-line);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s,
+                box-shadow 0.3s;
+}
+
+.showcase-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-accent);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
+}
+
+.cover-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 133.33%;
+    background-color: #020203;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-line);
+}
+
+.cover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-size-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.75);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-info {
+    padding: 22px;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    letter-spacing: -0.02em;
+}
+
+.card-type {
+    font-size: 12px;
+    background: var(--bg-badge);
+    color: var(--color-accent);
+    padding: 4px 14px;
+    border-radius: 30px;
+    font-weight: 600;
+    border: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-line);
+}
+
+.card-price {
+    color: var(--color-price);
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.view-action {
+    font-size: 13px;
+    color: var(--color-accent);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
