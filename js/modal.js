@@ -38,7 +38,7 @@ function refreshModalContent(prod) {
 
     // 2. Update product-specific fields (title/desc are single-language)
     document.getElementById('modalTitle').innerText = prod.title;
-    document.getElementById('modalType').innerText = data.type;
+    document.getElementById('modalType').innerText = prod.type;
     document.getElementById('modalPrice').innerText = prod.price;
     document.getElementById('modalTech').innerText = data.tech;
     document.getElementById('modalAuthor').innerText = data.author;

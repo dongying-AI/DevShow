@@ -3,7 +3,7 @@
    ============================================ */
 
 import { products, getProducts } from './products.js';
-import { currentLang, t } from './i18n.js';
+import { t } from './i18n.js';
 import { isLoggedIn } from './header.js';
 import { openModal } from './modal.js';
 
@@ -19,7 +19,6 @@ function renderProducts(filter) {
     const actionText = t(actionKey);
 
     grid.innerHTML = list.map((prod) => {
-        const data = prod[currentLang];
         return `
             <div class="showcase-card" onclick="window.openItemDetailByID('${prod.id}')">
                 <div class="cover-wrapper">
@@ -37,7 +36,7 @@ function renderProducts(filter) {
                 <div class="card-info">
                     <div class="card-header">
                         <h3 class="card-title">${prod.title}</h3>
-                        <span class="card-type">${data.type}</span>
+                        <span class="card-type">${prod.type}</span>
                     </div>
                     <div class="card-footer">
                         <span class="card-price">${prod.price}</span>

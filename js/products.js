@@ -4,10 +4,12 @@
    Schema:
    {
        id: string,
-       title: string,            // Product name (single, no zh/en split)
+       title: string,            // Product name (single)
        desc: string,             // Product description (single)
-       zh: { type, tech, author, tags[] },  // Chinese display values
-       en: { type, tech, author, tags[] },  // English display values
+       type: string,             // Product type (Chinese value, e.g. "桌面端软件")
+       tech: string,
+       author: string,
+       tags: string[],
        price: string,
        priceCurrency: "CNY" | "USD",
        color: string,            // Cover background color
@@ -26,18 +28,10 @@ let products = [
         id: "prod_1",
         title: "MindFlow AI 沉浸式知识库记事本",
         desc: "专为隐私设计的本地大模型 Markdown 笔记本。采用 Rust 重构打造极致响应速度，帮助用户在完全断网的环境下将碎片文字整理为互联的网状知识图谱，绝无数据泄露风险。",
-        zh: {
-            type: "桌面端软件",
-            tech: "Rust / Tailwind",
-            author: "Alex_🚀 (美国)",
-            tags: ["AI", "笔记", "隐私"]
-        },
-        en: {
-            type: "Desktop Software",
-            tech: "Rust / Tailwind",
-            author: "Alex_🚀 (USA)",
-            tags: ["AI", "Notes", "Privacy"]
-        },
+        type: "桌面端软件",
+        tech: "Rust / Tailwind",
+        author: "Alex_🚀 (美国)",
+        tags: ["AI", "笔记", "隐私"],
         price: "$ 29",
         priceCurrency: "USD",
         color: "#141416",
@@ -52,18 +46,10 @@ let products = [
         id: "prod_2",
         title: "PixelPerfect 像素绝对测量插件",
         desc: "专为前端和UI设计师研发的动态像素对齐工具。支持将UI设计稿以半透明形式直接覆盖于浏览器开发的网页之上，一键智能测量各元素间距差异。",
-        zh: {
-            type: "浏览器插件/脚本",
-            tech: "JavaScript / Chrome API",
-            author: "木子李 (中国)",
-            tags: ["前端", "设计", "Chrome"]
-        },
-        en: {
-            type: "Extension/Script",
-            tech: "JavaScript / Chrome API",
-            author: "Muzi Li (China)",
-            tags: ["Frontend", "Design", "Chrome"]
-        },
+        type: "浏览器插件/脚本",
+        tech: "JavaScript / Chrome API",
+        author: "木子李 (中国)",
+        tags: ["前端", "设计", "Chrome"],
         price: "¥ 49",
         priceCurrency: "CNY",
         color: "#1c1c1f",
@@ -104,18 +90,10 @@ function addProduct(data) {
         id: "prod_" + (_pidCounter++),
         title: data.title || "",
         desc: data.desc || "",
-        zh: {
-            type: data.zhType || "",
-            tech: data.tech || "",
-            author: data.author || "",
-            tags: data.tags || []
-        },
-        en: {
-            type: data.enType || "",
-            tech: data.tech || "",
-            author: data.author || "",
-            tags: data.tags || []
-        },
+        type: data.type || "",
+        tech: data.tech || "",
+        author: data.author || "",
+        tags: data.tags || [],
         price: data.price || "¥ 0",
         priceCurrency: data.priceCurrency || "CNY",
         color: data.color || "#141416",
@@ -137,11 +115,10 @@ function updateProduct(id, data) {
 
     if (data.title !== undefined)           p.title = data.title;
     if (data.desc !== undefined)            p.desc = data.desc;
-    if (data.zhType !== undefined)          p.zh.type = data.zhType;
-    if (data.enType !== undefined)          p.en.type = data.enType;
-    if (data.tech !== undefined)            { p.zh.tech = data.tech; p.en.tech = data.tech; }
-    if (data.author !== undefined)          { p.zh.author = data.author; p.en.author = data.author; }
-    if (data.tags !== undefined)            { p.zh.tags = data.tags; p.en.tags = data.tags; }
+    if (data.type !== undefined)            p.type = data.type;
+    if (data.tech !== undefined)            p.tech = data.tech;
+    if (data.author !== undefined)          p.author = data.author;
+    if (data.tags !== undefined)            p.tags = data.tags;
     if (data.price !== undefined)           p.price = data.price;
     if (data.priceCurrency !== undefined)   p.priceCurrency = data.priceCurrency;
     if (data.color !== undefined)           p.color = data.color;
@@ -173,7 +150,7 @@ function getProducts(filter) {
     };
     const targetZhType = typeMap[filter];
     if (!targetZhType) return [...products];
-    return products.filter(p => p.zh.type === targetZhType);
+    return products.filter(p => p.type === targetZhType);
 }
 
 export {

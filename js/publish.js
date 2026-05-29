@@ -27,7 +27,7 @@ let editingProductId = null;
 /* === Form Data Object === */
 const formData = {
     title: "",
-    zhType: "桌面端软件", enType: "Desktop Software",
+    type: "桌面端软件",
     tech: "", author: "",
     price: "", priceCurrency: "CNY",
     desc: "",
@@ -66,10 +66,9 @@ function openPublishEdit(productId) {
     // Pre-fill formData from existing product
     Object.assign(formData, {
         title: prod.title,
-        zhType: prod.zh.type,
-        enType: prod.en.type,
-        tech: prod.zh.tech,
-        author: prod.zh.author,
+        type: prod.type,
+        tech: prod.tech,
+        author: prod.author,
         price: prod.price.replace(/[¥$ ]/g, ''),
         priceCurrency: prod.priceCurrency,
         desc: prod.desc,
@@ -163,14 +162,8 @@ const STEP_RENDERERS = {
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label"><span class="required">*</span> 作品类型</label>
-                    <select class="form-select" id="pubZhType">
-                        ${PRODUCT_TYPES.zh.map(t => `<option value="${esc(t)}" ${formData.zhType === t ? 'selected' : ''}>${t}</option>`).join('')}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">&nbsp;</label>
-                    <select class="form-select" id="pubEnType">
-                        ${PRODUCT_TYPES.en.map((t, i) => `<option value="${esc(t)}" ${formData.enType === t ? 'selected' : ''}>${t}</option>`).join('')}
+                    <select class="form-select" id="pubType">
+                        ${PRODUCT_TYPES.zh.map(t => `<option value="${esc(t)}" ${formData.type === t ? 'selected' : ''}>${t}</option>`).join('')}
                     </select>
                 </div>
             </div>
@@ -288,19 +281,7 @@ const STEP_RENDERERS = {
    ================================================================ */
 
 function setupStep1() {
-    // Type sync: zh ↔ en
-    const zhType = document.getElementById('pubZhType');
-    const enType = document.getElementById('pubEnType');
-    if (zhType && enType) {
-        zhType.addEventListener('change', () => {
-            const idx = zhType.selectedIndex;
-            if (enType.options[idx]) enType.selectedIndex = idx;
-        });
-        enType.addEventListener('change', () => {
-            const idx = enType.selectedIndex;
-            if (zhType.options[idx]) zhType.selectedIndex = idx;
-        });
-    }
+    // No special setup needed — single type dropdown
 }
 
 function setupStep2() {
@@ -513,7 +494,7 @@ function updatePreview() {
 
     const currencySymbol = formData.priceCurrency === 'CNY' ? '¥' : '$';
     const priceDisplay = formData.price ? `${currencySymbol} ${formData.price}` : '¥ 0';
-    const zhType = formData.zhType || '桌面端软件';
+    const zhType = formData.type || '桌面端软件';
 
     card.innerHTML = `
         <div class="preview-cover" style="background:${formData.color};">
@@ -578,23 +559,21 @@ function showError(id, msg) {
 
 function collectStepData(step) {
     if (step === 1 || step === 3) {
-        const title   = document.getElementById('pubTitle');
-        const zhType  = document.getElementById('pubZhType');
-        const enType  = document.getElementById('pubEnType');
-        const tech    = document.getElementById('pubTech');
-        const author  = document.getElementById('pubAuthor');
-        const price   = document.getElementById('pubPrice');
+        const title    = document.getElementById('pubTitle');
+        const type     = document.getElementById('pubType');
+        const tech     = document.getElementById('pubTech');
+        const author   = document.getElementById('pubAuthor');
+        const price    = document.getElementById('pubPrice');
         const currency = document.getElementById('pubCurrency');
-        const license = document.getElementById('pubLicense');
+        const license  = document.getElementById('pubLicense');
 
-        if (title)    formData.title   = title.value.trim();
-        if (zhType)   formData.zhType  = zhType.value;
-        if (enType)   formData.enType  = enType.value;
-        if (tech)     formData.tech    = tech.value.trim();
-        if (author)   formData.author  = author.value.trim();
-        if (price)    formData.price   = price.value.trim();
+        if (title)    formData.title    = title.value.trim();
+        if (type)     formData.type     = type.value;
+        if (tech)     formData.tech     = tech.value.trim();
+        if (author)   formData.author   = author.value.trim();
+        if (price)    formData.price    = price.value.trim();
         if (currency) formData.priceCurrency = currency.value;
-        if (license)  formData.license = license.value;
+        if (license)  formData.license  = license.value;
     }
 
     if (step === 2 || step === 3) {
@@ -619,8 +598,7 @@ function submitPublish() {
     if (isEditMode && editingProductId) {
         updateProduct(editingProductId, {
             title: formData.title,
-            zhType: formData.zhType,
-            enType: formData.enType,
+            type: formData.type,
             tech: formData.tech,
             author: formData.author,
             price: formData.price,
@@ -670,7 +648,7 @@ function resetForm() {
     editingProductId = null;
     Object.assign(formData, {
         title: "",
-        zhType: "桌面端软件", enType: "Desktop Software",
+        type: "桌面端软件",
         tech: "", author: "",
         price: "", priceCurrency: "CNY",
         desc: "",
