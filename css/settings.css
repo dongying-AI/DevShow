@@ -1,26 +1,25 @@
 /* ============================================
-   Floating Settings Cog (bottom-right)
-   Theme & Language switcher
+   Floating Settings Cog
    ============================================ */
 
 .cog-settings-wrapper {
     position: fixed;
-    bottom: 35px;
-    right: 35px;
+    bottom: 32px;
+    right: 32px;
     z-index: 999;
 }
 
 .cog-btn {
-    width: 52px;
-    height: 52px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    background-color: var(--cog-bg);
-    border: 1px solid var(--border-line);
+    background: var(--cog-bg);
+    border: 1px solid var(--border-default);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     transition: all 0.25s ease;
 }
 
@@ -43,34 +42,24 @@
 
 .cog-popover {
     position: absolute;
-    bottom: 65px;
+    bottom: 62px;
     right: 0;
-    background-color: var(--bg-panel);
-    border: 1px solid var(--glass-border);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     padding: 22px;
-    border-radius: 12px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
-    display: none;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 56px rgba(0,0,0,0.35);
+    display: flex;
     flex-direction: column;
     gap: 18px;
     min-width: 260px;
-    backdrop-filter: blur(12px);
+    display: none;
+    backdrop-filter: blur(16px);
 }
 
 .cog-popover.show {
     display: flex;
-    animation: cogSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes cogSlideUp {
-    from {
-        transform: translateY(12px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ctrl-row {
@@ -85,22 +74,27 @@
     font-weight: 700;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
 }
 
 .select-input {
-    background: var(--bg-main);
+    background: var(--bg-surface);
     color: var(--text-primary);
-    border: 1px solid var(--border-line);
+    border: 1px solid var(--border-default);
     padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 13.5px;
+    border-radius: 8px;
+    font-size: 13px;
     outline: none;
     cursor: pointer;
     width: 100%;
     appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%237a7685' stroke-width='2' stroke-linecap='round'><polyline points='6 9 12 15 18 9'/></svg>");
     background-repeat: no-repeat;
-    background-position: right 12px center;
+    background-position: right 10px center;
     background-size: 14px;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }

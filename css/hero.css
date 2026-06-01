@@ -1,37 +1,132 @@
 /* ============================================
-   Hero Section
-   Radial gradient glow at top
+   Hero — Asymmetric Split Layout
    ============================================ */
 
 .hero {
-    padding: 75px 0 45px 0;
-    text-align: center;
-    background: radial-gradient(circle at top, var(--bg-badge) 0%, transparent 65%);
+    padding: 90px 0 60px 0;
+    position: relative;
+    overflow: hidden;
 }
 
-.hero h1 {
-    font-size: 44px;
+.hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 56px;
     font-weight: 800;
-    margin-bottom: 18px;
-    letter-spacing: -0.04em;
+    line-height: 1.08;
+    letter-spacing: -0.05em;
+    margin-bottom: 20px;
+    max-width: 520px;
 }
 
-.hero p {
+.hero-content h1 .accent {
+    color: var(--color-accent);
+    position: relative;
+}
+
+.hero-content p {
     font-size: 16px;
     color: var(--text-secondary);
-    max-width: 720px;
-    margin: 0 auto;
-    line-height: 1.6;
+    max-width: 460px;
+    line-height: 1.65;
+    margin-bottom: 28px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 340px;
+}
+
+/* Decorative geometric element */
+.hero-orb {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, var(--color-accent-glow), transparent 70%);
+    filter: blur(40px);
+    animation: orbFloat 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.hero-orb.secondary {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at 60% 60%, var(--color-violet-soft), transparent 70%);
+    top: 20px;
+    right: 40px;
+    animation-delay: -4s;
+}
+
+.hero-cards-preview {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: -20px;
+}
+
+.hero-mini-card {
+    width: 140px;
+    height: 186px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--card-shadow);
+    transform: rotate(-6deg);
+}
+
+.hero-mini-card:nth-child(2) {
+    transform: rotate(3deg) translateY(-12px);
+    z-index: 1;
+    border-color: var(--border-accent);
+}
+
+@keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(12px, -18px) scale(1.05); }
+    66% { transform: translate(-8px, 12px) scale(0.95); }
 }
 
 .visitor-tip {
     color: var(--color-price) !important;
-    font-size: 13.5px;
+    font-size: 13px;
     margin-top: 16px;
     font-weight: 600;
-    background: var(--bg-badge);
+    background: var(--color-accent-soft);
     display: inline-block;
     padding: 6px 18px;
     border-radius: 20px;
-    border: 1px solid rgba(249, 115, 22, 0.15);
+    border: 1px solid var(--border-accent);
+}
+
+/* Mobile: stack */
+@media (max-width: 768px) {
+    .hero .container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .hero-content h1 {
+        font-size: 36px;
+    }
+    .hero-visual {
+        height: 200px;
+        order: -1;
+    }
+    .hero-orb {
+        width: 180px;
+        height: 180px;
+    }
 }

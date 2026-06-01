@@ -48,13 +48,23 @@
     <!-- ================================================================ -->
     <section class="hero">
         <div class="container">
-            <h1 data-i18n="hero_title">全球独立数字化成果展示大厅</h1>
-            <p data-i18n="hero_desc">
-                零中介费、全生态直连。未登录用户仅可公开预览最新 Top 20 创新展品的封面形态。
-            </p>
-            <p id="visitorTip" class="visitor-tip" data-i18n="visitor_tip">
-                ⚠️ 提示：您当前尚未登录，点击任何卡片都无法查看产品详情和内置翻译留言框。
-            </p>
+            <div class="hero-content">
+                <h1 data-i18n="hero_title">全球独立数字化<span class="accent">成果展示</span>大厅</h1>
+                <p data-i18n="hero_desc">
+                    零中介费、全生态直连。未登录用户仅可公开预览最新 Top 20 创新展品的封面形态。
+                </p>
+                <p id="visitorTip" class="visitor-tip" data-i18n="visitor_tip">
+                    ⚠️ 提示：您当前尚未登录，点击任何卡片都无法查看产品详情和内置翻译留言框。
+                </p>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-orb"></div>
+                <div class="hero-orb secondary"></div>
+                <div class="hero-cards-preview">
+                    <div class="hero-mini-card"></div>
+                    <div class="hero-mini-card"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -82,91 +92,84 @@
     </div>
 
     <!-- ================================================================ -->
-    <!--  4. Testimonials / Review Marquee                                  -->
+    <!--  4. Testimonials / Horizontal Scroll-Snap                          -->
     <!-- ================================================================ -->
     <section class="testimonials-wrapper">
         <h2 class="section-title" data-i18n="review_title">
             来自 <span>全球创作者与买家</span> 的真实反馈
         </h2>
-        <div class="marquee-container">
-            <div class="marquee-track">
-                <!-- Review Card 1 -->
-                <div class="review-card">
-                    <div class="review-user">
-                        <div class="review-avatar">TH</div>
-                        <div class="review-user-info">
-                            <h5>Thomas H.</h5>
-                            <p data-i18n="review_user1_sub">SaaS Boilerplate | 🇺🇸 美国</p>
-                        </div>
+        <div class="review-scroll">
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="review-avatar">TH</div>
+                    <div class="review-user-info">
+                        <h5>Thomas H.</h5>
+                        <p data-i18n="review_user1_sub">SaaS Boilerplate | 🇺🇸 美国</p>
                     </div>
-                    <p class="review-content" data-i18n="review_user1_content">
-                        "在对话中隐藏联系方式后，通过平台自动翻译私信，我居然成功把代码资产转让给了一位中国买家。无界交流的体验太棒了！"
-                    </p>
                 </div>
-                <!-- Review Card 2 -->
-                <div class="review-card">
-                    <div class="review-user">
-                        <div class="review-avatar" style="color:var(--color-success);">老</div>
-                        <div class="review-user-info">
-                            <h5 data-i18n="review_user2_name">老齐 (个人创作者)</h5>
-                            <p data-i18n="review_user2_sub">自动化同步脚本 | 🇨🇳 中国</p>
-                        </div>
+                <p class="review-content" data-i18n="review_user1_content">
+                    "在对话中隐藏联系方式后，通过平台自动翻译私信，我居然成功把代码资产转让给了一位中国买家。无界交流的体验太棒了！"
+                </p>
+            </div>
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="review-avatar" style="color:var(--color-success);">老</div>
+                    <div class="review-user-info">
+                        <h5 data-i18n="review_user2_name">老齐 (个人创作者)</h5>
+                        <p data-i18n="review_user2_sub">自动化同步脚本 | 🇨🇳 中国</p>
                     </div>
-                    <p class="review-content" data-i18n="review_user2_content">
-                        "平台的 3:4 瀑布流封面视觉极具高级感。最让人安心的是未登录时隐藏全部核心数据，防自动化爬虫效果拉满！"
-                    </p>
                 </div>
-                <!-- Review Card 3 -->
-                <div class="review-card">
-                    <div class="review-user">
-                        <div class="review-avatar" style="color:#a855f7;">KM</div>
-                        <div class="review-user-info">
-                            <h5>Kenji M.</h5>
-                            <p data-i18n="review_user3_sub">资产独立采购商 | 🇯🇵 日本</p>
-                        </div>
+                <p class="review-content" data-i18n="review_user2_content">
+                    "平台的 3:4 瀑布流封面视觉极具高级感。最让人安心的是未登录时隐藏全部核心数据，防自动化爬虫效果拉满！"
+                </p>
+            </div>
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="review-avatar" style="color:#a855f7;">KM</div>
+                    <div class="review-user-info">
+                        <h5>Kenji M.</h5>
+                        <p data-i18n="review_user3_sub">资产独立采购商 | 🇯🇵 日本</p>
                     </div>
-                    <p class="review-content" data-i18n="review_user3_content">
-                        "虽然看中的工具作者是中国人，但我直接写日语询盘，对方在系统后台收到后无缝沟通，非常赞的技术媒介！"
-                    </p>
                 </div>
-
-                <!-- ===== Clone group for seamless infinite loop ===== -->
-                <div class="review-card">
-                    <div class="review-user">
-                        <div class="review-avatar">TH</div>
-                        <div class="review-user-info">
-                            <h5>Thomas H.</h5>
-                            <p data-i18n="review_user1_sub">SaaS Boilerplate | 🇺🇸 美国</p>
-                        </div>
+                <p class="review-content" data-i18n="review_user3_content">
+                    "虽然看中的工具作者是中国人，但我直接写日语询盘，对方在系统后台收到后无缝沟通，非常赞的技术媒介！"
+                </p>
+            </div>
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="review-avatar">TH</div>
+                    <div class="review-user-info">
+                        <h5>Thomas H.</h5>
+                        <p data-i18n="review_user1_sub">SaaS Boilerplate | 🇺🇸 美国</p>
                     </div>
-                    <p class="review-content" data-i18n="review_user1_content">
-                        "在对话中隐藏联系方式后，通过平台自动翻译私信，我居然成功把代码资产转让给了一位中国买家。无界交流的体验太棒了！"
-                    </p>
                 </div>
-                <div class="review-card">
-                    <div class="review-user">
-                        <div class="review-avatar" style="color:var(--color-success);">老</div>
-                        <div class="review-user-info">
-                            <h5 data-i18n="review_user2_name">老齐 (个人创作者)</h5>
-                            <p data-i18n="review_user2_sub">自动化同步脚本 | 🇨🇳 中国</p>
-                        </div>
+                <p class="review-content" data-i18n="review_user1_content">
+                    "在对话中隐藏联系方式后，通过平台自动翻译私信，我居然成功把代码资产转让给了一位中国买家。无界交流的体验太棒了！"
+                </p>
+            </div>
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="review-avatar" style="color:var(--color-success);">老</div>
+                    <div class="review-user-info">
+                        <h5 data-i18n="review_user2_name">老齐 (个人创作者)</h5>
+                        <p data-i18n="review_user2_sub">自动化同步脚本 | 🇨🇳 中国</p>
                     </div>
-                    <p class="review-content" data-i18n="review_user2_content">
-                        "平台的 3:4 瀑布流封面视觉极具高级感。最让人安心的是未登录时隐藏全部核心数据，防自动化爬虫效果拉满！"
-                    </p>
                 </div>
-                <div class="review-card">
-                    <div class="review-user">
-                        <div class="review-avatar" style="color:#a855f7;">KM</div>
-                        <div class="review-user-info">
-                            <h5>Kenji M.</h5>
-                            <p data-i18n="review_user3_sub">资产独立采购商 | 🇯🇵 日本</p>
-                        </div>
+                <p class="review-content" data-i18n="review_user2_content">
+                    "平台的 3:4 瀑布流封面视觉极具高级感。最让人安心的是未登录时隐藏全部核心数据，防自动化爬虫效果拉满！"
+                </p>
+            </div>
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="review-avatar" style="color:#a855f7;">KM</div>
+                    <div class="review-user-info">
+                        <h5>Kenji M.</h5>
+                        <p data-i18n="review_user3_sub">资产独立采购商 | 🇯🇵 日本</p>
                     </div>
-                    <p class="review-content" data-i18n="review_user3_content">
-                        "虽然看中的工具作者是中国人，但我直接写日语询盘，对方在系统后台收到后无缝沟通，非常赞的技术媒介！"
-                    </p>
                 </div>
+                <p class="review-content" data-i18n="review_user3_content">
+                    "虽然看中的工具作者是中国人，但我直接写日语询盘，对方在系统后台收到后无缝沟通，非常赞的技术媒介！"
+                </p>
             </div>
         </div>
     </section>

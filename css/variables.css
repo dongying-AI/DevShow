@@ -1,44 +1,66 @@
 /* ============================================
-   DevShow Design Tokens & CSS Variables
-   Theme: Deep dark base + warm orange accent
+   DevShow Design Tokens v2
+   Deep obsidian base + warm amber accent + violet undertones
    ============================================ */
 
 :root[data-theme="dark"] {
-    --bg-main: #09090b;
-    --bg-panel: #141416;
-    --bg-header: rgba(9, 9, 11, 0.8);
-    --text-primary: #f4f4f5;
-    --text-secondary: #71717a;
+    --bg-base: #050407;
+    --bg-surface: #0d0b10;
+    --bg-elevated: #131018;
+    --bg-header: rgba(5, 4, 7, 0.82);
+    --text-primary: #edeaf2;
+    --text-secondary: #7a7685;
+    --text-muted: #4e4a57;
     --color-accent: #f97316;
-    --color-accent-hover: #ea580c;
-    --color-price: #f97316;
-    --border-line: #27272a;
-    --bg-badge: rgba(249, 115, 22, 0.1);
+    --color-accent-glow: rgba(249, 115, 22, 0.18);
+    --color-accent-soft: rgba(249, 115, 22, 0.08);
+    --color-price: #fb923c;
+    --color-violet: #a78bfa;
+    --color-violet-soft: rgba(167, 139, 250, 0.08);
+    --border-subtle: #1c1922;
+    --border-default: #25222e;
+    --border-accent: rgba(249, 115, 22, 0.25);
     --color-danger: #ef4444;
     --color-success: #10b981;
-    --bg-modal: rgba(0, 0, 0, 0.9);
-    --cog-bg: #202023;
-    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.05);
+    --bg-modal: rgba(5, 4, 7, 0.92);
+    --cog-bg: #131018;
+    --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    --card-hover-shadow: 0 12px 48px rgba(249, 115, 22, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.025);
+    --glass-border: rgba(255, 255, 255, 0.04);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --radius-xl: 32px;
 }
 
 :root[data-theme="light"] {
-    --bg-main: #fafafa;
-    --bg-panel: #ffffff;
-    --bg-header: rgba(255, 255, 255, 0.85);
-    --text-primary: #18181b;
-    --text-secondary: #888883;
+    --bg-base: #f8f7fa;
+    --bg-surface: #ffffff;
+    --bg-elevated: #f0eef4;
+    --bg-header: rgba(248, 247, 250, 0.85);
+    --text-primary: #18151e;
+    --text-secondary: #6b6775;
+    --text-muted: #a09ab0;
     --color-accent: #ea580c;
-    --color-accent-hover: #c2410c;
+    --color-accent-glow: rgba(234, 88, 12, 0.1);
+    --color-accent-soft: rgba(234, 88, 12, 0.04);
     --color-price: #ea580c;
-    --border-line: #e4e4e7;
-    --bg-badge: rgba(234, 88, 12, 0.05);
+    --color-violet: #7c3aed;
+    --color-violet-soft: rgba(124, 58, 237, 0.05);
+    --border-subtle: #e8e5ef;
+    --border-default: #dcd8e5;
+    --border-accent: rgba(234, 88, 12, 0.2);
     --color-danger: #dc2626;
     --color-success: #16a34a;
-    --bg-modal: rgba(24, 24, 27, 0.4);
+    --bg-modal: rgba(248, 247, 250, 0.85);
     --cog-bg: #ffffff;
-    --card-shadow: 0 10px 25px rgba(24, 24, 27, 0.06);
-    --glass-bg: rgba(0, 0, 0, 0.02);
-    --glass-border: rgba(0, 0, 0, 0.05);
+    --card-shadow: 0 4px 20px rgba(24, 21, 30, 0.04);
+    --card-hover-shadow: 0 16px 40px rgba(234, 88, 12, 0.06);
+    --glass-bg: rgba(0, 0, 0, 0.015);
+    --glass-border: rgba(0, 0, 0, 0.04);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --radius-xl: 32px;
 }

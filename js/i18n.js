@@ -10,7 +10,7 @@ const langDict = {
         status_logged: "已登录 (已全面解锁橱窗)",
         btn_login_mock: "模拟登录平台",
         btn_logout_mock: "退出登录",
-        hero_title: "全球独立数字化成果展示大厅",
+        hero_title: "全球独立数字化<span class='accent'>成果展示</span>大厅",
         hero_desc: "零中介费、全生态直连。未登录用户仅可公开预览最新 Top 20 创新展品的封面形态。",
         visitor_tip: "⚠️ 提示：您当前尚未登录，点击任何卡片都无法查看产品详情和内置翻译留言框。",
         tag_top20: "最新Top 20展示面",
@@ -108,7 +108,7 @@ const langDict = {
         status_logged: "Logged In (Full Showcase Unlocked)",
         btn_login_mock: "Simulate Login",
         btn_logout_mock: "Sign Out",
-        hero_title: "Global Indie Products Connection Hub",
+        hero_title: "Global Indie <span class='accent'>Product Showcase</span> Hub",
         hero_desc: "Zero middleman fees, global direct matching. Non-logged-in visitors can only preview the 3:4 aspect ratio covers of Top 20 creative works.",
         visitor_tip: "⚠️ Alert: You are currently browsed as a visitor. Click action cannot view specifications or send machine-translated inquiries.",
         tag_top20: "Latest Top 20 Showcase",
@@ -218,7 +218,7 @@ function applyLanguage(lang) {
         const text = langDict[currentLang][key];
         if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
             element.setAttribute('placeholder', text);
-        } else if (key.includes('desc') || key.includes('li') || key.includes('disclaimer') || key.includes('review_title')) {
+        } else if (key.includes('desc') || key.includes('li') || key.includes('disclaimer') || key.includes('review_title') || key.includes('hero_title')) {
             element.innerHTML = text;
         } else {
             element.innerText = text;

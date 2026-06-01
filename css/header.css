@@ -1,36 +1,52 @@
 /* ============================================
-   Header / Navigation
-   Sticky with backdrop blur
+   Header — Liquid Glass Navigation
    ============================================ */
 
 header {
-    border-bottom: 1px solid var(--border-line);
-    background-color: var(--bg-header);
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-header);
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 75px;
+    height: 72px;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 800;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.06em;
+    display: flex;
+    align-items: center;
+    gap: 2px;
 }
 
 .logo span {
     color: var(--color-accent);
+    position: relative;
+}
+
+.logo span::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-accent);
+    opacity: 0.3;
+    border-radius: 1px;
 }
 
 .user-status {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
 }

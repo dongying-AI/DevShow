@@ -1,95 +1,73 @@
 /* ============================================
-   Testimonials / Review Marquee
-   Infinite scroll with gradient fade edges
+   Testimonials — Scroll-Snap Horizontal
    ============================================ */
 
 .testimonials-wrapper {
-    padding: 60px 0;
-    overflow: hidden;
-    background: var(--bg-panel);
-    border-top: 1px solid var(--border-line);
-    border-bottom: 1px solid var(--border-line);
-    position: relative;
+    padding: 70px 0;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .section-title {
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 800;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
     letter-spacing: -0.04em;
 }
 
-.section-title span {
-    color: var(--color-accent);
-}
+.section-title span { color: var(--color-accent); }
 
-.marquee-container {
-    position: relative;
-    width: 100%;
-}
-
-.marquee-container::before,
-.marquee-container::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 140px;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.marquee-container::before {
-    left: 0;
-    background: linear-gradient(to right, var(--bg-panel), transparent);
-}
-
-.marquee-container::after {
-    right: 0;
-    background: linear-gradient(to left, var(--bg-panel), transparent);
-}
-
-.marquee-track {
+.review-scroll {
     display: flex;
-    gap: 24px;
-    width: max-content;
-    animation: marquee-scroll 32s linear infinite;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 28px 24px 28px;
+    scrollbar-width: none;
 }
 
-.marquee-track:hover {
-    animation-play-state: paused;
-}
+.review-scroll::-webkit-scrollbar { display: none; }
 
 .review-card {
-    background-color: var(--bg-main);
-    border: 1px solid var(--border-line);
-    padding: 28px;
-    border-radius: 12px;
-    width: 380px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    min-width: 340px;
+    max-width: 380px;
     flex-shrink: 0;
+    scroll-snap-align: start;
     box-shadow: var(--card-shadow);
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.review-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-2px);
 }
 
 .review-user {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 .review-avatar {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: var(--border-line);
+    background: var(--border-default);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     font-size: 15px;
     color: var(--color-accent);
-    border: 1px solid var(--border-line);
+    border: 1px solid var(--border-default);
 }
 
 .review-user-info h5 {
@@ -107,15 +85,6 @@
     font-size: 14px;
     color: var(--text-primary);
     font-style: italic;
-    opacity: 0.9;
-    line-height: 1.6;
-}
-
-@keyframes marquee-scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-50% - 12px));
-    }
+    opacity: 0.85;
+    line-height: 1.65;
 }
